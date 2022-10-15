@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "API wrapper for triathlon.org API"
 authors = ["0xMRTT <0xMRTT@tuta.io>"]
 readme = "README.md"
-packages = [{include = "triathlon_py"}]
+packages = [{include = "triathlon"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
