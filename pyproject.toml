@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "triathlon-py"
+name = "triathlon"
 version = "0.1.0"
-description = ""
+description = "API wrapper for triathlon.org API"
 authors = ["0xMRTT <0xMRTT@tuta.io>"]
 readme = "README.md"
 packages = [{include = "triathlon_py"}]

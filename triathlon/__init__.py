@@ -1,0 +1,1 @@
+from .triathlon import TriathlonAPI
