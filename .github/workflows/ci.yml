@@ -40,7 +40,7 @@ jobs:
           poetry install
       - name: Prepare
         run: |
-          echo "${{ secrets.TRIATHLON_API_TOKEN }}" > secret.txt
+          echo "${{ secrets.TRIATHLON_API_TOKEN }}" > token.txt
       - name: Test with pytest
         run: |
           poetry run pytest
