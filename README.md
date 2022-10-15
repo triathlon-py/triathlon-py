@@ -19,7 +19,7 @@ print(api.search.athletes("james"))
 
 ## Documentation
 
-The documentation for the API can be found [here](https://developer.triathlon.org/docs).
+The documentation for the API can be found [here](https://developers.triathlon.org/docs).
 
 ## Contributing
 
