@@ -127,10 +127,32 @@ class VideosSearchEndpoint(SearchEndpoint):
 class AthleteEndpoint(BaseEndpoint):
     endpoint = "athlete"
 
+class SearchAPI:
+    def __init__(self, token) -> None:
+        self.token = token
+    def athletes(self, query):
+        return AtheletesSearchEndpoint(self.token, query=query).request()
+    
+    def events(self, query):
+        return EventsSearchEndpoint(self.token, query=query).request()
+    
+    def federations(self, query):
+        return FederationsSearchEndpoint(self.token, query=query).request()
+        
+    def courses(self, query):
+        return CoursesSearchEndpoint(self.token, query=query).request()
+    
+    def news(self, query):
+        return NewsSearchEndpoint(self.token, query=query).request()
+    
+    def videos(self, query):
+        return VideosSearchEndpoint(self.token, query=query).request()
 
 class TriathlonAPI:
     def __init__(self, token) -> None:
         self.token = token
-
-    def search_athletes(self, query):
-        return AtheletesSearchEndpoint(self.token, query=query).request()
+        self.search = SearchAPI(token)
+        
+if __name__ == "__main__":
+    api = TriathlonAPI("YOUR_TOKEN")
+    print(api.search.athletes("james"))
