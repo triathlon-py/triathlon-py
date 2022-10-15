@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+      - name: Prepare
+        run: |
+          export TRIATHLON_API_TOKEN="${{ secrets.TRIATHLON_API_TOKEN }}"
       - name: Test with pytest
         run: |
           poetry run pytest

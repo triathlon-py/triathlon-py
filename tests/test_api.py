@@ -1,6 +1,7 @@
+import os
+
 def get_token():
-    with open("token.txt", "r", encoding="utf-8") as f:
-        return f.read()
+    return os.environ["TRIATHLON_API_TOKEN"]    
 
 from triathlon import TriathlonAPI
 
