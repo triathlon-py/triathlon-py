@@ -1,6 +1,6 @@
 
 def get_token():
-    with open("token.txt", r") as token:
+    with open("token.txt", "r") as token:
         return token.read()
 
 from triathlon import TriathlonAPI
