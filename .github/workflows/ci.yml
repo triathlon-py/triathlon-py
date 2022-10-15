@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
-        poetry-version: ["1.0", "1.1.15"]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "pypy3.7"]
+        poetry-version: ["1.2.2"]
         os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
@@ -21,9 +21,23 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Cache ~/.cache/pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: python-${{ steps.setup-python.outputs.python-version }}
+      - name: Cache ~/.cache/pypoetry
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pypoetry
+          key: python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
       - name: Run image
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: ${{ matrix.poetry-version }}
-      - name: Poetry build
-        run: poetry build
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Test with pytest
+        run: |
+          poetry run pytest
