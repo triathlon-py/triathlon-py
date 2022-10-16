@@ -96,8 +96,8 @@ class SearchEndpoint(BaseEndpoint):
     def resolve_url(self, **kwargs):
         return f"{self.url}/{self.collection}"
 
-    def req_body(self, **kwargs):
-        return {"query": kwargs["query"]}, None
+    def req_body(self, page=None, per_page=None, query=None, filters=None, location=None, distance=None, start_date=None, end_date=None, elite=False):
+        return {"page": page, "per_page": per_page, "query": query, "filters": filters, "location":location, "distance":distance, "start_date": start_date, "end_date":end_date, "elite":elite}, None
 
 
 class AtheletesSearchEndpoint(SearchEndpoint):
@@ -130,23 +130,23 @@ class AthleteEndpoint(BaseEndpoint):
 class SearchAPI:
     def __init__(self, token) -> None:
         self.token = token
-    def athletes(self, query):
-        return AtheletesSearchEndpoint(self.token, query=query).request()
+    def athletes(self, query, **kwargs):
+        return AtheletesSearchEndpoint(self.token, query=query, **kwargs).request()
     
-    def events(self, query):
-        return EventsSearchEndpoint(self.token, query=query).request()
+    def events(self, query, **kwargs):
+        return EventsSearchEndpoint(self.token, query=query, **kwargs).request()
     
-    def federations(self, query):
-        return FederationsSearchEndpoint(self.token, query=query).request()
+    def federations(self, query, **kwargs):
+        return FederationsSearchEndpoint(self.token, query=query, **kwargs).request()
         
-    def courses(self, query):
-        return CoursesSearchEndpoint(self.token, query=query).request()
+    def courses(self, query, **kwargs):
+        return CoursesSearchEndpoint(self.token, query=query, **kwargs).request()
     
-    def news(self, query):
-        return NewsSearchEndpoint(self.token, query=query).request()
+    def news(self, query, **kwargs):
+        return NewsSearchEndpoint(self.token, query=query, **kwargs).request()
     
-    def videos(self, query):
-        return VideosSearchEndpoint(self.token, query=query).request()
+    def videos(self, query, **kwargs):
+        return VideosSearchEndpoint(self.token, query=query, **kwargs).request()
 
 class TriathlonAPI:
     def __init__(self, token) -> None:
@@ -154,5 +154,7 @@ class TriathlonAPI:
         self.search = SearchAPI(token)
         
 if __name__ == "__main__":
-    api = TriathlonAPI("YOUR_TOKEN")
-    print(api.search.athletes("james"))
+    with open("../token.txt", "r", encoding="utf-8") as f:
+        token = f.read()
+    api = TriathlonAPI(token)
+    print(api.search.events("London"))
