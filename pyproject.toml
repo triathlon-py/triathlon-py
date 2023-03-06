@@ -14,7 +14,7 @@ pytest = "^7.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
-importlib-metadata = "^5.0.0"
+importlib-metadata = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core"]
